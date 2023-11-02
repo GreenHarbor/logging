@@ -4,7 +4,7 @@ import { SearchService } from 'src/search/search.service';
 
 @Injectable()
 export class LogService {
-  constructor(private readonly searchService: SearchService) {}
+  constructor(private searchService: SearchService) {}
 
   async create(createLogDto: CreateLogDto) {
     try {

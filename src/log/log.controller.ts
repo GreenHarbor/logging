@@ -1,5 +1,10 @@
 import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import {
+  Ctx,
+  MessagePattern,
+  Payload,
+  RmqContext,
+} from '@nestjs/microservices';
 import { LogService } from './log.service';
 import { CreateLogDto } from './dto/create-log.dto';
 
@@ -7,8 +12,21 @@ import { CreateLogDto } from './dto/create-log.dto';
 export class LogController {
   constructor(private readonly logService: LogService) {}
 
-  @MessagePattern('createLog')
-  create(@Payload() createLogDto: CreateLogDto) {
-    return this.logService.create(createLogDto);
+  @MessagePattern('log_queue') // The pattern or routing key
+  handleLogMessage(@Payload() createLogDto: any) {
+    // Process the message received
+    console.log('log_queue');
+    console.log(createLogDto);
+    this.logService.create(createLogDto);
+
+    // Acknowledge the message if necessary
+  }
+
+  @MessagePattern('createLog') // The pattern or routing key
+  handleLogMessage2(@Payload() createLogDto: any) {
+    // Process the message received
+    console.log('createLog');
+    console.log(createLogDto);
+    this.logService.create(createLogDto);
   }
 }
