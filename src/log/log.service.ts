@@ -1,26 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLogDto } from './dto/create-log.dto';
-import { UpdateLogDto } from './dto/update-log.dto';
+import { SearchService } from 'src/search/search.service';
 
 @Injectable()
 export class LogService {
-  create(createLogDto: CreateLogDto) {
+  constructor(private readonly searchService: SearchService) {}
+
+  async create(createLogDto: CreateLogDto) {
+    try {
+      await this.searchService.insertLog(createLogDto);
+    } catch (err) {
+      console.log(err);
+    }
     return 'This action adds a new log';
-  }
-
-  findAll() {
-    return `This action returns all log`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} log`;
-  }
-
-  update(id: number, updateLogDto: UpdateLogDto) {
-    return `This action updates a #${id} log`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} log`;
   }
 }
