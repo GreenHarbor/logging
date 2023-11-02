@@ -14,9 +14,12 @@ async function bootstrap() {
     transport: Transport.RMQ,
     options: {
       urls: [`amqp://guest:guest@localhost:5672`], // Update with your credentials and host
-      queue: 'log_queue',
+      queue: 'logs',
       queueOptions: {
-        durable: false,
+        durable: true,
+      },
+      headers: {
+        'Content-Type': 'application/json',
       },
       noAck: false,
       prefetchCount: 1,
@@ -31,18 +34,18 @@ async function bootstrap() {
     transport: Transport.RMQ,
     options: {
       urls: ['amqp://guest:guest@localhost:5672'], // Replace with your actual connection string
-      queue: 'log_queue', // Replace with your actual queue name
+      queue: 'logs', // Replace with your actual queue name
       queueOptions: {
-        durable: false,
+        durable: true,
       },
     },
   });
 
   // Use the client to send a message
   const message = {
-    log_level: 'ERROR',
-    date: '2023-11-01T15:10:00Z',
-    detail: 'Database connection failed.',
+    log_level: 'INFO',
+    date: new Date(),
+    detail: 'Eunice WATCH!',
   }; // Replace with your actual message payload
   const pattern = 'createLog'; // Replace with your actual pattern or routing key
 

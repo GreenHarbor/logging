@@ -12,21 +12,12 @@ import { CreateLogDto } from './dto/create-log.dto';
 export class LogController {
   constructor(private readonly logService: LogService) {}
 
-  @MessagePattern('log_queue') // The pattern or routing key
-  handleLogMessage(@Payload() createLogDto: any) {
-    // Process the message received
-    console.log('log_queue');
-    console.log(createLogDto);
-    this.logService.create(createLogDto);
-
-    // Acknowledge the message if necessary
-  }
-
   @MessagePattern('createLog') // The pattern or routing key
-  handleLogMessage2(@Payload() createLogDto: any) {
+  handleLogMessage2(@Payload() createLogDto: any, @Ctx() context: RmqContext) {
     // Process the message received
-    console.log('createLog');
-    console.log(createLogDto);
     this.logService.create(createLogDto);
+    const channel = context.getChannelRef();
+    const originalMsg = context.getMessage();
+    channel.ack(originalMsg);
   }
 }
