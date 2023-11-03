@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLogDto } from './dto/create-log.dto';
-import { SearchService } from 'src/search/search.service';
+import { SearchService } from '../search/search.service';
 
 @Injectable()
 export class LogService {

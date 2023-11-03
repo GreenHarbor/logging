@@ -6,7 +6,6 @@ import {
   RmqContext,
 } from '@nestjs/microservices';
 import { LogService } from './log.service';
-import { CreateLogDto } from './dto/create-log.dto';
 
 @Controller()
 export class LogController {
