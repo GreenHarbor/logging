@@ -8,7 +8,9 @@ async function bootstrap() {
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.RMQ,
     options: {
-      urls: [`amqp://guest:guest@localhost:5672`], // Update with your credentials and host
+      urls: [
+        `amqp://admin:admingreenharbor@b-d9b47cdf-9f98-427e-b1ef-c0f3c02bcce0.mq.ap-southeast-1.amazonaws.com:5671`,
+      ], // Update with your credentials and host
       queue: 'logs',
       queueOptions: {
         durable: true,
