@@ -9,7 +9,7 @@ async function bootstrap() {
     transport: Transport.RMQ,
     options: {
       urls: [
-        `amqp://admin:admingreenharbor@b-d9b47cdf-9f98-427e-b1ef-c0f3c02bcce0.mq.ap-southeast-1.amazonaws.com:5671`,
+        `amqps://admin:admingreenharbor@b-d9b47cdf-9f98-427e-b1ef-c0f3c02bcce0.mq.ap-southeast-1.amazonaws.com:5671`,
       ], // Update with your credentials and host
       queue: 'logs',
       queueOptions: {
