@@ -5,7 +5,7 @@ import { SearchService } from './search.service';
 @Module({
   imports: [
     ElasticsearchModule.register({
-      node: 'http://elasticsearch-795535539.ap-southeast-1.elb.amazonaws.com/',
+      node: 'http://localhost:9200/',
     }),
   ],
   providers: [SearchService],
